@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume Page - Soham Kale</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    /* ===== Base Styles ===== */
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: 'Poppins', sans-serif; 
+    }
+    
+    body { 
+      background: #000000; 
+      color: white; 
+    }
+
+    /* ===== Main Content Section ===== */
+    .main-section {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 40px;
+      padding: 60px 50px;
+      max-width: 1400px;
+      margin: auto;
+    }
+
+    /* Left Side - Navigation Buttons */
+    .left-side {
+      width: 300px;
+      flex-shrink: 0;
+    }
+
+    .left-side h2 {
+      font-size: 38px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .left-side p {
+      font-size: 17px;
+      color: #aaa;
+      margin-bottom: 30px;
+      line-height: 1.5;
+    }
+
+    .left-side button {
+      width: 100%;
+      padding: 15px 0;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      background: transparent;
+      color: white;
+      border: 2px solid #2c2f3e;
+      cursor: pointer;
+      font-size: 17px;
+      transition: all 0.3s ease;
+    }
+
+    .left-side button.active,
+    .left-side button:hover {
+      border-color: #00ff88;
+      background: #00ff88;
+      color: black;
+    }
+
+    /* Right Side - Content Tabs */
+    .right-side {
+      flex: 1;
+    }
+
+    .tab-content {
+      display: none;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+    }
+
+    .tabcontent {
+      display: none;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 25px;
+    }
+
+    .tabcontent.active {
+      display: grid;
+    }
+
+    .tab-content.active {
+      display: grid;
+    }
+
+    /* Card Styles */
+    .card {
+      background: #1b1e2b;
+      padding: 26px;
+      border-radius: 16px;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 200px;
+    }
+    
+
+    .card:hover {
+      background: #25293b;
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      font-size: 18px;
+      color: #00ff88;
+    }
+    .card h2 {
+      font-size: 16px;
+      color: #00ff88;
+    }
+
+
+    .card h4 {
+      font-size: 24px;
+      margin: 14px 0;
+    }
+
+    .card p {
+      font-size: 16px;
+      color: #aaa;
+    }
+
+    /* About Me Section */
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .about-grid div {
+      line-height: 1.6;
+    }
+
+    .label {
+      color: #22c55e;
+      font-weight: bold;
+      display: inline-block;
+      margin-right: 5px;
+    }
+
+    /* Skills Section */
+    .skill-card {
+      text-align: center;
+    }
+
+    .skill-icon {
+      font-size: 3rem;
+      color: white;
+    }
+
+    .html-icon {
+      color: #00ff88;
+    }
+
+    /* ===== Responsive Styles ===== */
+    @media (max-width: 900px) {
+      .main-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+      }
+
+      .right-side .tab-content {
+        grid-template-columns: 1fr;
+      }
+
+      #skills.tab-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .main-section {
+        padding: 40px 20px;
+      }
+      
+      #skills.tabcontent {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    nav {
+    width: 100%;
+    height: 10vh;
+    position: sticky;
+}
+.nav-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.logo {
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+}
+.logo span {
+    color: #077b32;
+    text-shadow: 0 0 10px #077b32;
+}
+.hamburg, .cancel {
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    color: white;
+    display: none;
+    font-size: clamp(2.5rem, 0.5rem + 5vw, 3rem);
+}
+.nav-container .links {
+    display: flex;
+}
+.nav-container .links a {
+    position: relative;
+    font-size: 1.2rem;
+    color: white;
+    margin: 0 20px;
+    text-decoration: none;
+    font-weight: 550;
+    transition: 0.3s linear;
+}
+.nav-container .links a::before {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background-color: #077b32;
+    transition: 0.2s linear;
+}
+.nav-container .links a:hover::before {
+    width: 100%;
+}
+.nav-container .links a:hover {
+    color: #077b32;
+}
+.dropdown {
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    transform: translateY(-500px);
+    width: 100%;
+    height: auto;
+    backdrop-filter: blur(4px) brightness(40%);
+    box-shadow: 0 0 20px black;
+    transition: 0.2s linear;
+}
+.dropdown .links a {
+    display: flex;
+    color: white;
+    text-decoration: none;
+    justify-content: center;
+    padding: 15px 0;
+    align-items: center;
+    transition: 0.2s linear;
+}
+.dropdown .links a:hover {
+    background-color: #077b32;
+}
+
+@media (max-width: 884px) {
+    nav .logo {
+        position: absolute;
+        top: 16px;
+        left: 15px;
+        font-size: 1.5rem;
+    }
+    .nav-container .links {
+        display: none;
+    }
+    .hamburg, .cancel {
+        display: block;
+    }
+}
+
+  </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+          <div class="logo" data-aos="zoom-in" data-aos-duration="1500">
+            Soham <span>Kale</span>
+          </div>
+          <div class="links">
+            <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100"><a href="index.html">Home</a></div>
+            <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300"><a href="resume.html">Resume</a></div>
+            <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400"><a href="project.html">Projects</a></div>
+            <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="500"><a href="contact.html">Contact</a></div>
+          </div>
+          <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
+        </div>
+        <div class="dropdown">
+          <div class="links">
+            <a href="index.html">Home</a>
+            <a href="resume.html">Resume</a>
+            <a href="project.html">Projects</a>
+            <a href="contact.html">Contact</a>
+            <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
+          </div>
+        </div>
+      </nav>
+      
+
+<!-- ===== Main Content ===== -->
+<section class="main-section">
+  <!-- Left Side - Navigation Buttons -->
+  <div class="left-side">
+    <h2>Why Hire Me?</h2>
+    <p>I'm a fast learner, creative problem solver, and detail-oriented developer who delivers clean, efficient, and user-focused solutions. I adapt quickly, communicate well, and thrive in collaborative environments.</p>
+    <button onclick="showTab('experience')" class="active">Experience</button>
+    <button onclick="showTab('education')">Education</button>
+    <button onclick="showTab('skills')">Skills</button>
+    <button onclick="showTab('about')">About Me</button>
+  </div>
+
+  <!-- Right Side - Content Tabs -->
+  <div class="right-side">
+    <!-- Experience Tab -->
+    <div class="tab-content active" id="experience">
+      <div class="card">
+        <h3>Feb-March 2025</h3>
+        <h4>FullStack Web Developer</h4>
+        <p>EY GDS</p>
+        <p>Developing UI with React, backend with Express.js, real-time bidding integrating secure
+          payments.</p>
+      </div>
+      <div class="card">
+        <h3>Nov-Dec 2024
+        </h3>
+        <h4>Frontend Developer</h4>
+        <p>Intern Certify</p>
+        <p>Tools used HTML, CSS, JS and works on different frontend projects.</p>
+      </div>
+      <!-- <div class="card">
+        <h3>2019 - 2020</h3>
+        <h4>UI/UX Designer</h4>
+        <p>Abc Inc.</p>
+        <p>Lorem ipsum dolor sit amet consectetur.</p>
+      </div>
+      <div class="card">
+        <h3>2018 - 2019</h3>
+        <h4>Junior Developer</h4>
+        <p>XYZ Corp.</p>
+        <p>Lorem ipsum dolor sit amet consectetur.</p>
+      </div> -->
+      <!-- Add more experience cards as needed -->
+    </div>
+
+    <!-- Education Tab -->
+    <div class="tab-content" id="education">
+      <div class="card">
+        <h3>March 2020</h3>
+        <h4>SSC</h4>
+        <p>Shri Jagdamba Vidyalaya, Rashin</p>
+        <h2> Percentage : 95.00 </h2>
+      </div>
+      <div class="card">
+        <h3>April 2020</h3>
+        <h4>HSC</h4>
+        <p>Vidya Pratishthan’s Atrs, Science and Commerce College, Baramati</p>
+        <h2>Percentage : 72.33 </h2>
+      </div>
+      <div class="card">
+        <h3>2022 - 2026</h3>
+        <h4>Bachelor's of Engineering</h4>
+        <p>(Computer Engineering)</p>
+        <p>AISSMS College Of Engineering Pune</p>
+        <h2>GPA: 9.3/10</h2>
+      </div>
+    </div>
+
+    <!-- Skills Tab -->
+    <div class="tabcontent" id="skills">
+      <div class="card skill-card">
+        <i class="fab fa-html5 skill-icon html-icon"></i>
+        <p>HTML5</p>
+      </div>
+      <div class="card skill-card">
+        <i class="fab fa-css3-alt skill-icon"></i>
+        <p>CSS3</p>
+      </div>
+      <div class="card skill-card">
+        <i class="fab fa-js skill-icon"></i>
+        <p>JavaScript</p>
+      </div>
+      <div class="card skill-card">
+        <i class="fab fa-react skill-icon"></i>
+        <p>React</p>
+      </div>
+      <div class="card skill-card">
+        <i class="fab fa-vuejs skill-icon"></i>
+        <p>Vue.js</p>
+      </div>
+      <div class="card skill-card">
+        <i class="fab fa-node-js skill-icon"></i>
+        <p>Node.js</p>
+      </div>
+    </div>
+
+    <!-- About Me Tab -->
+    <!-- <div class="tab-content" id="about">
+      <div class="about-grid">
+        <div>
+          <span class="label">Name:</span> Soham Kale
+        </div>
+        <div>
+          <span class="label">Location:</span> India
+        </div>
+        <div><span class="label">Status:</span> Married</div>
+        <div><span class="label">City:</span> San Francisco</div>
+        <div><span class="label">Experience:</span> 10+ Years</div>
+        <div><span class="label">Full Time:</span> Available</div>
+        <div><span class="label">Phone:</span> (+12) 345 678 910</div>
+        <div><span class="label">Email:</span> lucius@example.com</div>
+      </div>
+      </div> -->
+      <div class="tab-content" id="about">
+        <div class="card">
+        <h3>Name :</h3>
+          <p>Soham Baban Kale</p>
+          <h3>Mobile No :</h3>
+          <p>+91 9699143937</p>
+        </div>
+        <div class="card">
+          <h2>Email :</h2>
+          <p>sohambkale045@gmail.com</p>
+          <h2>Age :</h2>
+          <p>21</p>
+        </div>
+        <div class="card">
+          <h2>City</h2>
+          <p>Pune</p>
+          <h2>Nationality :</h2>
+          <p>Indian</p>
+        </div>
+        <!-- <div class="card">
+          <h2>Name</h2>
+           <p>ABC University</p>
+         </div> -->
+         
+      </div>
+  
+    </div>
+  </div>
+</section>
+
+<script>
+  function showTab(id) {
+    const tabs = document.querySelectorAll('.tab-content');
+    const tabs1 = document.querySelectorAll('.tabcontent');
+    const buttons = document.querySelectorAll('.left-side button');
+
+    tabs.forEach(tab => tab.classList.remove('active'));
+    tabs1.forEach(tab1 => tab1.classList.remove('active'));
+    buttons.forEach(btn => btn.classList.remove('active'));
+
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  function hamburg() {
+    const navbar = document.querySelector(".dropdown");
+    navbar.style.transform = "translateY(0px)";
+}
+
+function cancel() {
+    const navbar = document.querySelector(".dropdown");
+    navbar.style.transform = "translateY(-500px)";
+}
+
+</script>
+
+</body>
+</html>
